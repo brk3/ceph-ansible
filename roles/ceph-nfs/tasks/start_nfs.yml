@@ -83,6 +83,10 @@
     name: nfs-ganesha
     state: started
     enabled: yes
+  register: nfs_ganesha_start
+  retry: 10
+  delay: 3
+  until: nfs_ganesha_start.rc == 0
   when:
     - not containerized_deployment
     - ceph_nfs_enable_service
